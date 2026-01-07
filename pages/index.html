@@ -1,0 +1,19 @@
+<script>
+    fetch('/api/ranking')
+        .then(r => r.json())
+        .then(data => {
+            const tbody = document.getElementById('ranking');
+            tbody.innerHTML = ""; // Limpa antes de popular
+            data.forEach((a, i) => {
+                tbody.innerHTML += `
+          <tr>
+            <td>#${i + 1}</td>
+            <td>${a.name}</td>
+            <td>${a.sales}</td>
+            <td>R$ ${a.total.toFixed(2)}</td>
+          </tr>
+        `;
+            });
+        })
+        .catch(err => console.error("Erro ao buscar ranking:", err));
+</script>
